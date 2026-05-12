@@ -7,7 +7,7 @@ public class Ejercicio9 {
 
     public static void main(String[] args) {
 
-        File archivo = new File("notas.txt");
+        File archivo = new File("C:\\Users\\05_1DAW_Alum\\Desktop\\DAW\\PRO\\UD9\\Ejercicio9.txt");
 
         try {
 
