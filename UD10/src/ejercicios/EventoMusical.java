@@ -1,4 +1,5 @@
 package ejercicios;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -6,8 +7,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Transient;
 
 @Entity()
+@SequenceGenerator(name = "evento_seq", sequenceName = "evento_sequence", allocationSize = 10)
 class EventoMusical implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,6 +21,8 @@ class EventoMusical implements Serializable {
 	private String nombre;
 	private LocalDate fecha;
 	private BigDecimal recaudacion;
+	@Transient
+	private int control;
 	
 	
 	public EventoMusical(String nombre, LocalDate fecha, BigDecimal recaudacion) {
@@ -72,6 +78,14 @@ class EventoMusical implements Serializable {
 
 	public void setRecaudacion(BigDecimal recaudacion) {
 		this.recaudacion = recaudacion;
+	}
+	
+	public int getControl() {
+		return control;
+	}
+
+	public void setControl(int control) {
+		this.control = control;
 	}
 
 }
