@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class Conciertos {
     public static void main(String[] args) {
@@ -78,6 +81,22 @@ public class Conciertos {
 
             System.out.println("-----------------------------------");
         }
-    }
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("objectdb:$objectdb/db/eventos.odb");
+        
+        EntityManager em = emf.createEntityManager();
+        
+        em.getTransaction().begin();
+        
+        em.persist(rockFest);
+        em.persist(electroNight);
+        em.persist(rapBattle);
+        em.persist(operaGala);
+        
+        em.getTransaction().commit();
+        
+        em.close();
+        emf.close();
+      }
 
 }
