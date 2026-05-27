@@ -23,6 +23,9 @@ class EventoMusical implements Serializable {
 	private BigDecimal recaudacion;
 	@Transient
 	private int control;
+	@ElementCollection
+	private List<Artistas> artistasConfirmados = new ArrayList<>();
+	
 	
 	
 	public EventoMusical(String nombre, LocalDate fecha, BigDecimal recaudacion) {
@@ -78,6 +81,26 @@ class EventoMusical implements Serializable {
 
 	public void setRecaudacion(BigDecimal recaudacion) {
 		this.recaudacion = recaudacion;
+	}
+
+	public GeneroMusical getGenero() {
+		return genero;
+	}
+
+	public void setGenero(GeneroMusical genero) {
+		this.genero = genero;
+	}
+	
+	public void setArtistasConfirmados(List<Artistas> artistasConfirmados) {
+		this.artistasConfirmados = artistasConfirmados;
+	}
+	
+	public void addArtista(Artistas artista) {
+		this.artistasConfirmados.add(artista);
+	}
+	
+	public List<Artistas> getArtistasConfirmados() {
+		return artistasConfirmados;
 	}
 	
 	public int getControl() {
