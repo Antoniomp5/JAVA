@@ -1,22 +1,33 @@
 package ejercicios;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Artistas implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    
 	private String nombre;
 	private String nacionalidad;
 	private int annosExperiencia;
 	
 	public Artistas(String nombre, String nacionalidad, int annosExperiencia) {
-		super();
 		this.nombre = nombre;
 		this.nacionalidad = nacionalidad;
 		this.annosExperiencia = annosExperiencia;
+	}
+	public Artistas() {
+
 	}
 
 	public String getNombre() {
@@ -42,10 +53,14 @@ public class Artistas implements Serializable{
 	public void setAnnosExperiencia(int annosExperiencia) {
 		this.annosExperiencia = annosExperiencia;
 	}
-	
-	
 
-	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }
 
