@@ -93,7 +93,42 @@ public class Conciertos {
         em.persist(rapBattle);
         em.persist(operaGala);
         
+        
+        
         em.getTransaction().commit();
+        
+        Long idPrimerEvento = rockFest.getId();
+        
+        EventoMusical eventoPorId = em.find(EventoMusical.class, idPrimerEvento);
+
+        System.out.println("===== EVENTO POR ID =====");
+        System.out.println("Nombre: " + eventoPorId.getNombre());
+        System.out.println("Fecha: " + eventoPorId.getFecha());
+        System.out.println("Genero: " + eventoPorId.getGenero());
+        
+
+        EventoMusical eventoJPQLStatic = em.createQuery(
+                "SELECT e FROM EventoMusical e WHERE e.nombre = 'Electro Night'",
+                EventoMusical.class)
+                .getSingleResult();
+
+        System.out.println("===== JPQL ESTÁTICA =====");
+        System.out.println("Nombre: " + eventoJPQLStatic.getNombre());
+        System.out.println("Fecha: " + eventoJPQLStatic.getFecha());
+
+
+
+        String nombreBuscado = "Electro Night";
+
+        EventoMusical eventoJPQLDinamica = em.createQuery(
+                "SELECT e FROM EventoMusical e WHERE e.nombre = :nombre",
+                EventoMusical.class)
+                .setParameter("nombre", nombreBuscado)
+                .getSingleResult();
+
+        System.out.println("===== JPQL DINÁMICA =====");
+        System.out.println("Nombre: " + eventoJPQLDinamica.getNombre());
+        System.out.println("Fecha: " + eventoJPQLDinamica.getFecha());
         
         em.close();
         emf.close();
