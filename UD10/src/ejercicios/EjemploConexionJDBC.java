@@ -13,12 +13,12 @@ public class EjemploConexionJDBC {
             String deleteSQL = "DELETE FROM productos";
 
             // --- 2. Insertar 3 nuevos productos ---
-            String insertSQL1 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor) " +
-                                "VALUES ('Manzana', 'Fruta fresca', 1.50, 100, 1, 1)";
-            String insertSQL2 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor) " +
-                                "VALUES ('Pera', 'Fruta dulce', 1.20, 80, 1, 1)";
-            String insertSQL3 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor) " +
-                                "VALUES ('Plátano', 'Fruta tropical', 0.90, 120, 1, 2)";
+            String insertSQL1 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor, "
+            		+ "pais_origen) " + "VALUES ('Manzana', 'Manzanas golden ', 0.50 , 100, 1, 1, 'Francia')";
+            String insertSQL2 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor,"
+            		+ "pais_origen) " + "VALUES ('Pera', 'Peras conferencia ', 0.25, 80, 1, 2, 'España')";
+            String insertSQL3 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor, "
+            		+ "pais_origen) " + "VALUES ('Uva ', 'Uvas groumet ', 0.30, 120, 1, 2, 'España')";
 
             // --- 3. Modificar el precio de la pera a 0.20 € ---
             String updateSQL = "UPDATE productos SET precio = 0.20 WHERE nombre = 'Pera'";
@@ -38,7 +38,6 @@ public class EjemploConexionJDBC {
             }
 
             // --- 5. Usar execute() para imprimir productos españoles ---
-            // Asumiendo que la tabla productos tiene un campo 'pais_origen'
             String selectEspañoles = "SELECT * FROM productos WHERE pais_origen = 'España'";
             try (Statement stmt = conexion.createStatement()) {
                 boolean hayResultados = stmt.execute(selectEspañoles);
@@ -54,6 +53,29 @@ public class EjemploConexionJDBC {
                     }
                 }
             }
+            String insertSQL4 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor, "
+            		+ "pais_origen) " + "VALUES ('Kiwi', 'Zaspri gold ', 1.20 , 100, 1, 1, 'Nueva Zelanda')";
+            String insertSQL5 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor,"
+            		+ "pais_origen) " + "VALUES ('Perito ', 'Peritos de Tavizna ', 0.18, 80, 1, 2, 'España')";
+            String insertSQL6 = "INSERT INTO productos (nombre, descripcion, precio, stock, id_categoria, id_proveedor, "
+            		+ "pais_origen) " + "VALUES ('Plátano ', 'Plátano canario ', 0.40, 120, 1, 2, 'España')";
+            
+            try (Statement stmt = conexion.createStatement()) {
+                // Añadir consultas al batch
+                stmt.addBatch(deleteSQL);
+                stmt.addBatch(insertSQL1);
+                stmt.addBatch(insertSQL2);
+                stmt.addBatch(insertSQL3);
+                stmt.addBatch(insertSQL4);
+                stmt.addBatch(insertSQL5);
+                stmt.addBatch(insertSQL6);
+                stmt.addBatch(updateSQL);
+
+                // Ejecutar el batch
+                stmt.executeBatch();
+                System.out.println("Batch ejecutado correctamente.");
+            }
+
 
             // --- 6. Mostrar metadatos de la conexión ---
             DatabaseMetaData metaData = conexion.getMetaData();
