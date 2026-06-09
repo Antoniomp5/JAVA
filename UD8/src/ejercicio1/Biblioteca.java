@@ -63,3 +63,24 @@ public class Biblioteca {
         scanner.close();
     }
 }
+
+/*
+ * 1. ¿Por qué HashSet no garantiza un orden específico?
+ *    Porque HashSet almacena los elementos utilizando una tabla hash.
+ *    Los elementos se organizan según su valor hash y no según el
+ *    orden en que fueron insertados, por lo que el orden de recorrido
+ *    puede variar.
+ *
+ * 2. ¿Cuándo sería preferible usar un Iterator en lugar de un for-each?
+ *    Cuando necesitamos recorrer la colección y eliminar elementos de
+ *    forma segura durante la iteración. Además, Iterator proporciona
+ *    más control sobre el recorrido mediante métodos como hasNext()
+ *    y next().
+ *
+ * 3. ¿Qué pasaría si intentamos modificar el Set mientras iteramos con for-each?
+ *    Se produciría una ConcurrentModificationException en tiempo de
+ *    ejecución, ya que no está permitido modificar directamente la
+ *    colección mientras se recorre con un for-each. Para eliminar
+ *    elementos de forma segura debe utilizarse el método remove() del
+ *    Iterator.
+ */
