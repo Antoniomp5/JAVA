@@ -38,3 +38,20 @@ public class InventarioFruteria {
         );
     }
 }
+/*
+ * 1. Después de actualizar "Manzanas" no aparecen dos entradas.
+ *    El valor anterior se sobrescribe porque en un HashMap
+ *    las claves son únicas. Si una clave ya existe, put()
+ *    reemplaza el valor asociado a esa clave.
+ *
+ * 2. Se puede usar un número entero como clave, pero debe ser
+ *    de tipo Integer, no int, ya que los genéricos de Java
+ *    solo aceptan objetos.
+ *    Ejemplo:
+ *    HashMap<Integer, Integer> inventario = new HashMap<>();
+ *
+ * 3. Un HashMap es más eficiente para un inventario porque
+ *    permite acceder directamente a un producto mediante su clave.
+ *    Con una ArrayList habría que recorrer los elementos uno a uno
+ *    hasta encontrar el producto buscado.
+ */
